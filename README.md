@@ -8,3 +8,6 @@ The app users can given a product link and similar products can be found.
 The app uses deep learning method to compare images of product.
 
 The model contain a CNN model that find embedding for product images and then find the nearest neighbour using KNN .
+For training the model the kaggle competition dataset shopee-product-matching was used.
+
+The model is containerized using Docker and deployed in Heroku.
