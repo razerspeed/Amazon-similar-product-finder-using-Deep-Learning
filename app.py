@@ -108,6 +108,3 @@ if user_input :
         gif_runner.empty()
 
         output_prediction()
-
-
-output_prediction()
