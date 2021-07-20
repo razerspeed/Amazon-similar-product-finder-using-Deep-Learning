@@ -11,10 +11,11 @@ import string
 
 from nltk.corpus import words
 import nltk
+nltk.download('words')
 
 
 transtable = str.maketrans('', '', string.punctuation)
-HEADERS = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/80.0'}
+HEADERS = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/60.0'}
 
 def delete_files():
     folder = 'test_images/'
@@ -31,7 +32,7 @@ def delete_files():
 #processing giving page and extracting data
 
 def clean_text(text):
-    nltk.download('words')
+
     search_title = ""
     for i in text.split(' '):
         if i.lower() in words.words():
@@ -64,53 +65,108 @@ def download_image(image_url):
 def create_dataset(given_url):
 
     delete_files()
-    # given_url='https://www.amazon.in/Jalshree-Control-Rechargeable-Rotating-Off-Road/dp/B08ZCLLFLY/ref=sr_1_2?dchild=1&keywords=Ascetic+Double+Sided+360+Degree+Remote+Control+Rechargeable+Stunt+Car+Toy&qid=1626596003&sr=8-2'
-    webpage = requests.get(given_url, headers=HEADERS)
+    for attempt in range(10):
+        try:
+            print("attempt ",attempt)
 
-    soup = BeautifulSoup(webpage.content, "lxml")
+            webpage = requests.get(given_url, headers=HEADERS)
 
+            soup = BeautifulSoup(webpage.content, "lxml")
 
-    title = soup.find("span", attrs={"id":'productTitle'})
+            title = soup.find("span", attrs={"id": 'productTitle'})
 
-    # Inner NavigableString Object
-    title_value = title.string
+            # Inner NavigableString Object
+            title_value = title.string
 
-    # Title as a string value
-    title_string = title_value.strip()
+            # Title as a string value
+            title_string = title_value.strip()
 
-    # price
-    price = soup.find("span", attrs={"id": "priceblock_ourprice"})
-    price = price.text
+            # price
+            price = soup.find("span", attrs={"id": "priceblock_ourprice"})
+            price = price.text
 
-    # Printing Product Title
-    print(title_string)
+            # Printing Product Title
+            print(title_string)
 
+            s = soup.find("img", attrs={"id": 'landingImage'})
 
-    s=soup.find("img", attrs={"id":'landingImage'})
+            s.get("data-a-dynamic-image")
 
-    s.get("data-a-dynamic-image")
+            t = ast.literal_eval(s.get("data-a-dynamic-image"))
 
-    t=ast.literal_eval(s.get("data-a-dynamic-image"))
+            image_link = list(t)[0]
+            print(image_link)
+            url = "https://www.amazon.in/s?k="
 
-    image_link=list(t)[0]
-    print(image_link)
-    url = "https://www.amazon.in/s?k="
+            search_string = clean_text(title_string)
 
-    search_string = clean_text(title_string)
+            search_string = search_string.replace(" ", "+")
 
-    search_string = search_string.replace(" ", "+")
+            filename = download_image(image_link)
 
-    filename = download_image(image_link)
+            test = pd.DataFrame([[0, filename, clean_text(title_string), given_url, price]],
+                                columns=["posting_id", "image", "title", "url", "price"])
 
-    test = pd.DataFrame([[0, filename, clean_text(title_string), given_url,price]],
-                        columns=["posting_id", "image", "title", "url","price"])
+            s = fetch_page(url + search_string)
+            data = find_all_product(s)
+            test1 = pd.DataFrame(data, columns=["posting_id", "image", "title", "url", "price"])
+            test = test.append(test1)
 
-    s = fetch_page(url + search_string)
-    data = find_all_product(s)
-    test1 = pd.DataFrame(data, columns=["posting_id", "image", "title", "url","price"])
-    test = test.append(test1)
+            test.to_csv("test1.csv", index=None)
 
-    test.to_csv("test1.csv", index=None)
+        except Exception as e:
+            print(e)
+            continue
+        else:
+            print("attempt fail")
+            break
+
+    # webpage = requests.get(given_url, headers=HEADERS)
+    #
+    # soup = BeautifulSoup(webpage.content, "lxml")
+    #
+    #
+    # title = soup.find("span", attrs={"id":'productTitle'})
+    #
+    # # Inner NavigableString Object
+    # title_value = title.string
+    #
+    # # Title as a string value
+    # title_string = title_value.strip()
+    #
+    # # price
+    # price = soup.find("span", attrs={"id": "priceblock_ourprice"})
+    # price = price.text
+    #
+    # # Printing Product Title
+    # print(title_string)
+    #
+    #
+    # s=soup.find("img", attrs={"id":'landingImage'})
+    #
+    # s.get("data-a-dynamic-image")
+    #
+    # t=ast.literal_eval(s.get("data-a-dynamic-image"))
+    #
+    # image_link=list(t)[0]
+    # print(image_link)
+    # url = "https://www.amazon.in/s?k="
+    #
+    # search_string = clean_text(title_string)
+    #
+    # search_string = search_string.replace(" ", "+")
+    #
+    # filename = download_image(image_link)
+    #
+    # test = pd.DataFrame([[0, filename, clean_text(title_string), given_url,price]],
+    #                     columns=["posting_id", "image", "title", "url","price"])
+    #
+    # s = fetch_page(url + search_string)
+    # data = find_all_product(s)
+    # test1 = pd.DataFrame(data, columns=["posting_id", "image", "title", "url","price"])
+    # test = test.append(test1)
+    #
+    # test.to_csv("test1.csv", index=None)
 
 
 #doing the search and finding the product related to the give product and extracting all the data required
