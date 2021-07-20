@@ -25,9 +25,9 @@ st.text('')
 
 base_path="test_images/"
 
-
+st.markdown('#### PASTE THE LINK OF THE PRODUCT YOU WANT TO SEARCH FOR.')
 default_value_goes_here="https://www.amazon.in/QONETIC-Rotating-Projector-Changing-Bedroom/dp/B08G1BMJ12/ref=sr_1_3_sspa?dchild=1&keywords=night+light&qid=1626663205&sr=8-3-spons&psc=1&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEzSkRaUVVRMEtKSTlNJmVuY3J5cHRlZElkPUEwMTMwNzk5Mk1SR005SVNKRU9BNCZlbmNyeXB0ZWRBZElkPUEwODg3ODM4MVpKSDc2ME81QTQ2MiZ3aWRnZXROYW1lPXNwX2F0ZiZhY3Rpb249Y2xpY2tSZWRpcmVjdCZkb05vdExvZ0NsaWNrPXRydWU="
-user_input = st.text_input("Enter the Product Link", default_value_goes_here)
+user_input = st.text_input(" ", default_value_goes_here)
 
 def output_prediction():
     df = pd.read_pickle("prediction.pkl")
@@ -93,13 +93,26 @@ def display_image(image,col1, col2,caption):
 
     return gif_runner
 
-if user_input :
 
+# from model_save import load_model
+#
+# @st.cache
+# def loading_model():
+#     model=load_model()
+#     return model
+
+@st.cache
+def download_model():
     download_from_drive()
+
+if user_input :
+    # model=load_model()
+
     if st.button('Search'):
+        p=st.markdown('#### FINDING SIMILAR PRODUCTS...')
         col1, col2 = st.beta_columns([1, 5])
         gif_runner = display_image("downloading.gif", col1, col2, "Downloading data")
-
+        download_model()
 
         print(user_input, "here")
 
@@ -109,7 +122,7 @@ if user_input :
         gif_runner = display_image("processing.gif",col1, col2,"Prccessing Data")
         predict()
         gif_runner.empty()
-
+        p.empty()
         output_prediction()
 
 
