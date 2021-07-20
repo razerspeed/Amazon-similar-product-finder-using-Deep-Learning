@@ -95,10 +95,11 @@ def display_image(image,col1, col2,caption):
 
 if user_input :
 
+    download_from_drive()
     if st.button('Search'):
         col1, col2 = st.beta_columns([1, 5])
         gif_runner = display_image("downloading.gif", col1, col2, "Downloading data")
-        download_from_drive()
+
 
         print(user_input, "here")
 
