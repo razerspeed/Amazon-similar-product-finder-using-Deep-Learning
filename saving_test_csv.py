@@ -115,10 +115,9 @@ def create_dataset(given_url):
             test.to_csv("test1.csv", index=None)
 
         except Exception as e:
-            print(e)
+            print("Exception error",e)
             continue
         else:
-            print("attempt fail")
             break
 
     # webpage = requests.get(given_url, headers=HEADERS)
@@ -233,3 +232,10 @@ def find_all_product(soup):
 
         
     return data
+
+
+
+
+
+
+
