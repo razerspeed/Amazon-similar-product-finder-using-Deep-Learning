@@ -14,4 +14,7 @@ The model is containerized using Docker and deployed in AWS
 
 Link to Web App : http://13.233.201.126:8501/
 
+Demo video of App: https://youtu.be/16IZpM6QmW8
+
+
 
