@@ -233,10 +233,3 @@ def find_all_product(soup):
 
         
     return data
-
-
-
-
-
-
-
