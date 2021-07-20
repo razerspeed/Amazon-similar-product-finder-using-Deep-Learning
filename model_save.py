@@ -230,15 +230,24 @@ class ArcMarginProduct(nn.Module):
         return output
 
 
+# def load_model():
+#     model = ShopeeNet(n_classes=CLASSES, model_name=model_name)
+#     model.eval()
+#
+#     model.load_state_dict(torch.load(IMG_MODEL_PATH), strict=False)
+#     model = model.to(device)
+#
+#     return model
+
 
 
 def get_image_embeddings(image_paths):
     embeds = []
-    
+
     model = ShopeeNet(n_classes=CLASSES,model_name=model_name)
     model.eval()
 
-    model.load_state_dict(torch.load(IMG_MODEL_PATH,map_location=torch.device('cpu')),strict=False)
+    model.load_state_dict(torch.load(IMG_MODEL_PATH),strict=False)
     model = model.to(device)
 
     image_dataset = ShopeeDataset(image_paths=image_paths,transforms=get_test_transforms())
