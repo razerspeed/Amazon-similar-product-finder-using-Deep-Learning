@@ -15,9 +15,8 @@ nltk.download('words')
 
 
 transtable = str.maketrans('', '', string.punctuation)
-HEADERS = { Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit\
-/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36
-}
+HEADERS = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0", "Accept-Encoding":"gzip, deflate", 
+           "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "DNT":"1","Connection":"close", "Upgrade-Insecure-Requests":"1"}
 
 
 def delete_files():
