@@ -106,23 +106,25 @@ def download_model():
     download_from_drive()
 
 if user_input :
-    # model=load_model()
 
     if st.button('Search'):
         p=st.markdown('#### FINDING SIMILAR PRODUCTS...')
         col1, col2 = st.beta_columns([1, 5])
         gif_runner = display_image("downloading.gif", col1, col2, "Downloading data")
         download_model()
+        print("model downloaded")
 
-        print(user_input, "here")
 
 
         create_dataset(user_input)
+        print("here")
         gif_runner.empty()
         gif_runner = display_image("processing.gif",col1, col2,"Prccessing Data")
         predict()
+        print("predict")
         gif_runner.empty()
         p.empty()
         output_prediction()
+        print("output")
 
 
