@@ -15,7 +15,15 @@ nltk.download('words')
 
 
 transtable = str.maketrans('', '', string.punctuation)
-HEADERS = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/60.0'}
+HEADERS = { 
+'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', 
+'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 
+'Accept-Language' : 'en-US,en;q=0.5',
+'Accept-Encoding' : 'gzip', 
+'DNT' : '1', # Do Not Track Request Header 
+'Connection' : 'close'
+}
+
 
 def delete_files():
     folder = 'test_images/'
