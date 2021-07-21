@@ -27,7 +27,7 @@ from sklearn.neighbors import NearestNeighbors
 
 
 
-DIM = (512,512)
+DIM = (256,256)
 
 BATCH_SIZE = 12
 SEED = 2020
@@ -35,9 +35,9 @@ device = torch.device('cpu')
 CLASSES = 11014
 CHECK_SUB = False
 GET_CV = False
-model_name = 'efficientnet_b3'
+model_name = 'efficientnet_b0'
 # MODEL PATH
-IMG_MODEL_PATH = 'model_efficientnet_b3_IMG_SIZE_512_arcface.bin'
+IMG_MODEL_PATH = 'model_efficientnet_b0_IMG_SIZE_256_arcface.bin'
 #Metric Loss and its params
 loss_module = 'arcface' #'cosface' #'adacos'
 s = 30.0
