@@ -15,13 +15,8 @@ nltk.download('words')
 
 
 transtable = str.maketrans('', '', string.punctuation)
-HEADERS = { 
-'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36', 
-'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 
-'Accept-Language' : 'en-US,en;q=0.5',
-'Accept-Encoding' : 'gzip', 
-'DNT' : '1', # Do Not Track Request Header 
-'Connection' : 'close'
+HEADERS = { Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit\
+/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36
 }
 
 
@@ -80,7 +75,7 @@ def create_dataset(given_url):
             webpage = requests.get(given_url, headers=HEADERS)
 
             soup = BeautifulSoup(webpage.content, "lxml")
-
+            print(soup)
             title = soup.find("span", attrs={"id": 'productTitle'})
 
             # Inner NavigableString Object
