@@ -10,7 +10,7 @@ The app uses deep learning method to compare images of product.
 The model contain a CNN model that find embedding for product images and then find the nearest neighbour using KNN .
 For training the model the kaggle competition dataset shopee-product-matching was used.
 
-The model is containerized using Docker and deployed in AWS
+The model is deployed in AWS
 
 Demo video of App: https://youtu.be/16IZpM6QmW8
 
@@ -18,6 +18,19 @@ Link to Web App : http://13.233.201.126:8501/
 
 Note the web app is not working as amazon is blocking the ip address , hence unable to scrape product.
 Solution is to use Amazon API to fetch data.
+
+# HOW TO RUN #
+
+1> Run  pythom download.py 
+   to download the pretrained model
+   
+2> pip install -r requirment.txt
+    to install required libraries
+    
+3> streamlit run app.py
+
+
+
 
 
 
