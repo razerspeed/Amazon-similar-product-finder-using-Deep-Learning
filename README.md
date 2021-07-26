@@ -20,12 +20,12 @@ Note the web app is not working as amazon is blocking the ip address , hence una
 Solution is to use Amazon API to fetch data.
 
 ## HOW TO RUN ##
-
-1> Run  pythom download.py 
-   to download the pretrained model
    
-2> pip install -r requirment.txt
+1> pip install -r requirment.txt
     to install required libraries
+    
+2> Run  python download.py 
+   to download the pretrained model
     
 3> streamlit run app.py
 
