@@ -14,7 +14,7 @@ The model is deployed in AWS
 
 Demo video of App: https://youtu.be/16IZpM6QmW8
 
-Link to Web App : http://13.233.201.126:8501/
+Link to Web App : http://35.154.205.146:8501/
 
 Note the web app is not working as amazon is blocking the ip address , hence unable to scrape product.
 Solution is to use Amazon API to fetch data.
