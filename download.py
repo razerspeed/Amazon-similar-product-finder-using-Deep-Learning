@@ -7,3 +7,4 @@ def download_from_drive():
     output = 'model_efficientnet_b0_IMG_SIZE_256_arcface.bin'
     gdown.download(url, output, quiet=False)
 
+download_from_drive()
