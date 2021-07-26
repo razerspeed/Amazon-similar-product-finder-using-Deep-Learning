@@ -1,5 +1,4 @@
 -f https://download.pytorch.org/whl/torch_stable.html
-requests==2.25.1
 torch==1.8.1+cpu
 streamlit==0.81.1
 torchvision==0.9.1+cpu
@@ -13,8 +12,7 @@ albumentations==1.0.3
 opencv-python-headless
 timm==0.4.12
 gdown==3.13.0
-beautifulsoup4==4.9.3
-pyenchant==3.2.1
+selenium
 scikit_learn==0.24.2
 nltk
-lxml
+
